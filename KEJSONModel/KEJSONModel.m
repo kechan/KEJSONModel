@@ -58,7 +58,7 @@
             
             // Figure out what class/type the element of this array is:
             // Convention: just remove the 's' at the end of the name and capitalize
-            NSString *elemClassName = [[KEJSONModel removeSuffixS:key] capitalizedString];
+            NSString *elemClassName = [KEJSONModel capitalizeFirstChar:[KEJSONModel removeSuffixS:key]];
             
             Class elemClass = NSClassFromString(elemClassName);
             // TODO: Handle elemClass == nil, class has not been defined.
@@ -140,6 +140,10 @@
     [regex replaceMatchesInString:str options:0 range:NSMakeRange(0, inputString.length) withTemplate:@""];
     
     return str;
+}
+
++(NSString *)capitalizeFirstChar:(NSString *)inputString {
+    return [inputString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[inputString substringToIndex:1] uppercaseString]];
 }
 
 @end

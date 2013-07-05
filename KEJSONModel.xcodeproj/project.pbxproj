@@ -19,6 +19,7 @@
 		1B27109A17867C6300B14E6C /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B27109617867C6300B14E6C /* MenuItem.m */; };
 		1B27109B17867C6300B14E6C /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B27109817867C6300B14E6C /* Review.m */; };
 		1B27109C17867C6300B14E6C /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B27109917867C6300B14E6C /* sample.json */; };
+		1B57249917868F610071D1CA /* Root.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B57249817868F610071D1CA /* Root.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +54,8 @@
 		1B27109717867C6300B14E6C /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
 		1B27109817867C6300B14E6C /* Review.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Review.m; sourceTree = "<group>"; };
 		1B27109917867C6300B14E6C /* sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
+		1B57249717868F610071D1CA /* Root.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Root.h; sourceTree = "<group>"; };
+		1B57249817868F610071D1CA /* Root.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Root.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,8 @@
 			children = (
 				1B27108D17867C0D00B14E6C /* KEJSONModelTests.h */,
 				1B27108E17867C0D00B14E6C /* KEJSONModelTests.m */,
+				1B57249717868F610071D1CA /* Root.h */,
+				1B57249817868F610071D1CA /* Root.m */,
 				1B27109517867C6300B14E6C /* MenuItem.h */,
 				1B27109617867C6300B14E6C /* MenuItem.m */,
 				1B27109717867C6300B14E6C /* Review.h */,
@@ -259,6 +264,7 @@
 				1B27108F17867C0D00B14E6C /* KEJSONModelTests.m in Sources */,
 				1B27109A17867C6300B14E6C /* MenuItem.m in Sources */,
 				1B27109B17867C6300B14E6C /* Review.m in Sources */,
+				1B57249917868F610071D1CA /* Root.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +408,7 @@
 				1B27107B17867AD400B14E6C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1B27109117867C0E00B14E6C /* Build configuration list for PBXNativeTarget "KEJSONModelTests" */ = {
 			isa = XCConfigurationList;
@@ -410,6 +417,7 @@
 				1B27109317867C0E00B14E6C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,11 +7,12 @@
 //
 
 #import "KEJSONModelTests.h"
+#import "Root.h"
 #import "MenuItem.h"
 #import "Review.h"
 
 @interface KEJSONModelTests ()
-@property (nonatomic, strong) NSMutableArray *menuItems;
+@property (nonatomic, strong) Root *root;
 @end
 
 @implementation KEJSONModelTests
@@ -27,29 +28,23 @@
     }
     
     NSError *error = nil;
+    
     NSData *data = [[NSMutableData alloc] initWithContentsOfFile:fullfilename];
     NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-    NSMutableArray *menuItemsJson = dict[@"menuitems"];
     
-    self.menuItems = [@[] mutableCopy];
-    
-    [menuItemsJson enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [self.menuItems addObject:[[MenuItem alloc] initWithDictionary:obj]];
-    }];
-    
+    self.root = [[Root alloc] initWithDictionary:dict];
 }
 
 - (void)tearDown
 {
-    self.menuItems = nil;
-    
+    self.root = nil;
     [super tearDown];
 }
 
 - (void)testBasic
 {
     //    STFail(@"Unit tests are not implemented yet in LibJSONModelTests");
-    MenuItem *menuItem = self.menuItems[0];
+    MenuItem *menuItem = self.root.menuItems[0];
     
     STAssertTrue([menuItem.itemId isEqualToString:@"JAP122"], @"Menuitem id is not JAP122");
     STAssertTrue([menuItem.image isEqualToString:@"http://d1.myhotel.com/food_image1.jpg"], @"Menuitem image url is not http://d1.myhotel.com/food_image1.jpg");
