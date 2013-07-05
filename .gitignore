@@ -1,0 +1,15 @@
+.DS_Store
+*.swp
+*~.nib
+
+#*.plist
+
+#*.jpg
+
+*.pbxuser
+*.perspective
+*.perspectivev3
+
+xcuserdata
+
+UserInterfaceState.xcuserstate

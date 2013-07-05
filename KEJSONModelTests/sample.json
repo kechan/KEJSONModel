@@ -1,0 +1,20 @@
+{
+    "menuitems" : [{
+                   "id": "JAP122",
+                   "image": "http://d1.myhotel.com/food_image1.jpg",
+                   "name": "Teriyaki Bento",
+                   "spicyLevel": "2",
+                   "rating" : "4",
+                   "description" : "Teriyaki Bento is one of the best lorem ipsum dolor sit",
+                   "waitingTime" : "930",
+                   "reviewCount" : "4",
+                   "reviews" : [{
+                                "id" : "rev1",
+                                "reviewText" : "This is an awesome place to eat",
+                                "reviewerName" : "Awesome Man",
+                                "reviewedDate" : "10229274633",
+                                "rating" : "5"
+                    }]
+                   }],
+    "status" : "OK"
+}
