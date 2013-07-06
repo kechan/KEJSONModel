@@ -30,6 +30,12 @@
     NSError *error = nil;
     
     NSData *data = [[NSMutableData alloc] initWithContentsOfFile:fullfilename];
+    
+    Class NSJSONSerializationClass = NSClassFromString(@"NSJSONSerialization");
+    
+    if (NSJSONSerializationClass == nil)
+        STFail(@"KEJSONModelTests need iOS 5.0 or above");
+
     NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
     
     self.root = [[Root alloc] initWithDictionary:dict];
