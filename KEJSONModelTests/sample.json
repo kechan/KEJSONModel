@@ -7,7 +7,7 @@
                    "rating" : "4",
                    "description" : "Teriyaki Bento is one of the best lorem ipsum dolor sit",
                    "waitingTime" : "930",
-                   "reviewCount" : "4",
+                   "review-count" : "4",
                    "reviews" : [{
                                 "id" : "rev1",
                                 "reviewText" : "This is an awesome place to eat",
