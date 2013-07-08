@@ -11,22 +11,14 @@
 
 @implementation MenuItem
 
--(id)init {
-    self = [super init];
-    if (self) {
-        // Initialization code here.
-        
-    }
-    return self;
-}
-
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-    if([key isEqualToString:@"id"])
+    if ([key isEqualToString:@"id"])
         self.itemId = value;
     else if([key isEqualToString:@"description"])
         self.itemDescription = value;
-    else [super setValue:value forUndefinedKey:key];
+    else
+        [super setValue:value forUndefinedKey:key];
 }
 
 -(NSString*) description {

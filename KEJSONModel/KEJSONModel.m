@@ -48,8 +48,9 @@
 -(void)setValue:(id)value forKey:(NSString *)key {
     
     // If key contains "-", convert to lower case start and the rest camel case
-    
-    key = [KEJSONModel dashStringToLowerCaseStartCamelCaseString:key];
+    // eg. convert row-count to rowCount
+    key = [KEJSONModel dashDelimitedStringToUncapitalizedCamelCaseString:key];
+    key = [KEJSONModel underscoreDelimitedStringToUncapitalizedCamelCaseString:key];
     
     // perform type/class checking
     // Introspect on the key/property's class type
@@ -152,14 +153,33 @@
     return [inputString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[inputString substringToIndex:1] uppercaseString]];
 }
 
-+(NSString *)dashStringToLowerCaseStartCamelCaseString:(NSString *)inputString {
-    // eg. convert row_count to rowCount
++(NSString *)dashDelimitedStringToUncapitalizedCamelCaseString:(NSString *)inputString {
+    // eg. convert row-count to rowCount
     
     if ([inputString rangeOfString:@"-"].location == NSNotFound)
         return inputString;
     
     NSMutableString *returnString = [NSMutableString new];
     NSArray *a = [inputString componentsSeparatedByString:@"-"];
+    
+    // Do not capitalize the 1st one.
+    [returnString appendString:a[0]];
+    
+    for (int i = 1; i < a.count; i++) {
+        NSString *capSubstr = [a[i] capitalizedString];
+        [returnString appendString:capSubstr];
+    }
+    return returnString;
+}
+
++(NSString *)underscoreDelimitedStringToUncapitalizedCamelCaseString:(NSString *)inputString {
+    // eg. convert row_count to rowCount
+    
+    if ([inputString rangeOfString:@"_"].location == NSNotFound)
+        return inputString;
+    
+    NSMutableString *returnString = [NSMutableString new];
+    NSArray *a = [inputString componentsSeparatedByString:@"_"];
     
     // Do not capitalize the 1st one.
     [returnString appendString:a[0]];

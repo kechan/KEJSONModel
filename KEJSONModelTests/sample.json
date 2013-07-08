@@ -3,7 +3,7 @@
                    "id": "JAP122",
                    "image": "http://d1.myhotel.com/food_image1.jpg",
                    "name": "Teriyaki Bento",
-                   "spicyLevel": "2",
+                   "spicy_level": "2",
                    "rating" : "4",
                    "description" : "Teriyaki Bento is one of the best lorem ipsum dolor sit",
                    "waitingTime" : "930",
