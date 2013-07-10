@@ -11,24 +11,20 @@
 
 @implementation MenuItem
 
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    if ([key isEqualToString:@"id"])
-        self.itemId = value;
-    else if([key isEqualToString:@"description"])
-        self.itemDescription = value;
-    else
-        [super setValue:value forUndefinedKey:key];
++(NSDictionary *) jsonKeyToObjectPropertyNameMap {
+    return @{@"id": @"itemId", @"description": @"itemDescription"};
 }
 
 -(NSString*) description {
     return [NSString stringWithFormat:@"%@ - %@", self.name, self.itemDescription];
 }
 
-//===========================================================
-//  Keyed Archiving
-//
-//===========================================================
+#pragma mark - Keyed Archiving
+
+-(BOOL) allowsKeyedCoding {
+    return YES;
+}
+
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.itemId forKey:@"itemId"];

@@ -8,7 +8,7 @@
 
 #import "KEJSONModel.h"
 
-@interface Review : KEJSONModel
+@interface Review : KEJSONModel <NSCoding, NSCopying>
 
 @property (nonatomic, strong) NSString *rating;
 @property (nonatomic, strong) NSString *reviewDate;

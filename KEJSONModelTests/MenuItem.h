@@ -19,7 +19,7 @@
  "reviewCount" : 4
  */
 
-@interface MenuItem : KEJSONModel
+@interface MenuItem : KEJSONModel <NSCoding, NSCopying>
 
 @property (nonatomic, strong) NSString *itemId;
 @property (nonatomic, strong) NSString *image;
@@ -31,4 +31,6 @@
 @property (nonatomic, strong) NSString *reviewCount;
 
 @property (nonatomic, strong) NSMutableArray *reviews;
+
+
 @end

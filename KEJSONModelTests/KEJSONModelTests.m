@@ -69,6 +69,7 @@
         STAssertTrue([review.reviewerName isEqualToString:@"Awesome Man"], @"Review reviewerName is not Awesome Man");
         STAssertTrue([review.reviewText isEqualToString:@"This is an awesome place to eat"], @"Review reviewText is not This is an awesome place to eat");
     }
+    
 }
 
 

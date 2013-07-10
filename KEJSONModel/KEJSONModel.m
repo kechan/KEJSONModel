@@ -11,6 +11,12 @@
 
 @implementation KEJSONModel
 
++(NSDictionary *)jsonKeyToObjectPropertyNameMap {
+    // subclass should override this if there's any remap of JSON key vs. Object property name
+    return nil;
+}
+
+# pragma mark - Designated Init
 -(id) initWithDictionary:(NSMutableDictionary *)jsonObject {  // Designated
     if ((self = [super init])) {
         [self setValuesForKeysWithDictionary:jsonObject];
@@ -18,33 +24,20 @@
     return self;
 }
 
-
--(BOOL) allowsKeyedCoding {
-    return YES;
-}
-
--(id)initWithCoder:(NSCoder *)aDecoder {
-    return self;
-}
-
--(void)encodeWithCoder:(NSCoder *)aCoder {
-    // do nothing.
-}
-
--(id)mutableCopyWithZone:(NSZone *)zone {
-    // Sub class implementation shoudl do a deep mutable copy
-    // this class doesn't have any ivars so this is ok
-    KEJSONModel *newModel = [[KEJSONModel allocWithZone:zone] init];
-    return newModel;
-}
-
--(id)copyWithZone:(NSZone *)zone {
-    // Sub class implementation should do a deep copy
-    KEJSONModel *newModel = [[KEJSONModel allocWithZone:zone] init];
-    return newModel;
-}
-
 # pragma mark - KVC
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{    
+    NSDictionary *key2propMap = [[self class] jsonKeyToObjectPropertyNameMap];
+    
+    if (key2propMap && key2propMap[key])
+        [self setValue:value forKey:key2propMap[key]];
+    else {
+        // subclass implementation should set the correct key value mappings for custom keys
+        NSLog(@"Undefined Key: %@", key);
+    }
+
+}
+
 -(void)setValue:(id)value forKey:(NSString *)key {
     
     // If key contains "-", convert to lower case start and the rest camel case
@@ -99,12 +92,12 @@
     return nil;
 }
 
--(void)setValue:(id)value forUndefinedKey:(NSString *)key {
-    
-    // subclass implementation should set the correct key value mappings for custom keys
-    NSLog(@"Undefined Key: %@", key);
-    
-}
+//-(void)setValue:(id)value forUndefinedKey:(NSString *)key {
+//    
+//    // subclass implementation should set the correct key value mappings for custom keys
+//    NSLog(@"Undefined Key: %@", key);
+//    
+//}
 
 #pragma mark - Helper
 + (NSString *)propertyTypeStringOfProperty:(objc_property_t) property {

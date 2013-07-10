@@ -10,19 +10,14 @@
 
 @implementation Review
 
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    if([key isEqualToString:@"id"])
-        self.reviewId = value;
-    else
-        [super setValue:value forUndefinedKey:key];
+#pragma mark - JSON Key & Object Property Name Remapping
+
++(NSDictionary *) jsonKeyToObjectPropertyNameMap {
+    return @{@"id": @"reviewId"};
 }
 
+#pragma mark - Keyed Archiving
 
-//===========================================================
-//  Keyed Archiving
-//
-//===========================================================
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.rating forKey:@"Rating"];

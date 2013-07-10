@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface KEJSONModel : NSObject <NSCoding, NSCopying, NSMutableCopying>
+@interface KEJSONModel : NSObject
+
++(NSDictionary *)jsonKeyToObjectPropertyNameMap;
 
 -(id)initWithDictionary:(NSMutableDictionary *)jsonObject;
 
