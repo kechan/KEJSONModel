@@ -80,6 +80,14 @@
             return;       // IMPORTANT: you don't want the usual another setValue:forKey: treatment
         }
         
+        // Handle JSONModel
+        Class elemClass = NSClassFromString(propertyType);
+        if ([elemClass isSubclassOfClass:[KEJSONModel class]]) {
+            id elemObj = [[elemClass alloc] initWithDictionary:value];
+            [super setValue:elemObj forKey:key];
+            return;
+        }
+
     }
     
     [super setValue:value forKey:key];
