@@ -10,11 +10,9 @@
 
 @interface Review : KEJSONModel <NSCoding, NSCopying>
 
-@property (nonatomic, strong) NSString *rating;
-@property (nonatomic, strong) NSString *reviewDate;
-@property (nonatomic, strong) NSString *reviewerName;
-@property (nonatomic, strong) NSString *reviewedDate;
 @property (nonatomic, strong) NSString *reviewId;
 @property (nonatomic, strong) NSString *reviewText;
+@property (nonatomic, strong) NSString *reviewerName;
+@property (nonatomic, strong) NSString *rating;
 
 @end

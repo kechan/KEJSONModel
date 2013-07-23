@@ -21,7 +21,6 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.rating forKey:@"Rating"];
-    [encoder encodeObject:self.reviewDate forKey:@"ReviewedDate"];
     [encoder encodeObject:self.reviewerName forKey:@"ReviewerName"];
     [encoder encodeObject:self.reviewId forKey:@"ReviewId"];
     [encoder encodeObject:self.reviewText forKey:@"ReviewText"];
@@ -32,8 +31,6 @@
     if ((self = [super init])) {
         if ([decoder containsValueForKey:@"Rating"])
             self.rating = [decoder decodeObjectForKey:@"Rating"];
-        if ([decoder containsValueForKey:@"ReviewedDate"])
-            self.reviewDate = [decoder decodeObjectForKey:@"ReviewedDate"];
         if ([decoder containsValueForKey:@"ReviewerName"])
             self.reviewerName = [decoder decodeObjectForKey:@"ReviewerName"];
         if ([decoder containsValueForKey:@"ReviewId"])
@@ -50,7 +47,6 @@
     id theCopy = [[[self class] allocWithZone:zone] init];  // use designated initializer
     
     [theCopy setRating:[self.rating copy]];
-    [theCopy setReviewDate:[self.reviewDate copy]];
     [theCopy setReviewerName:[self.reviewerName copy]];
     [theCopy setReviewId:[self.reviewId copy]];
     [theCopy setReviewText:[self.reviewText copy]];

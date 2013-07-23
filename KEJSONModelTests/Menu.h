@@ -8,10 +8,11 @@
 
 #import "KEJSONModel.h"
 #import "MenuItem.h"
+#import "Status.h"
 
-@interface Root : KEJSONModel
+@interface Menu : KEJSONModel
 
 @property (nonatomic, strong) NSMutableArray *menuItems;
-@property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) Status *status;
 
 @end

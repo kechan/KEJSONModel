@@ -19,7 +19,8 @@
 		1B27109A17867C6300B14E6C /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B27109617867C6300B14E6C /* MenuItem.m */; };
 		1B27109B17867C6300B14E6C /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B27109817867C6300B14E6C /* Review.m */; };
 		1B27109C17867C6300B14E6C /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B27109917867C6300B14E6C /* sample.json */; };
-		1B57249917868F610071D1CA /* Root.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B57249817868F610071D1CA /* Root.m */; };
+		1B57249917868F610071D1CA /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B57249817868F610071D1CA /* Menu.m */; };
+		1BE4D6B1179E369400BD3B3F /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE4D6B0179E369300BD3B3F /* Status.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,8 +55,10 @@
 		1B27109717867C6300B14E6C /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
 		1B27109817867C6300B14E6C /* Review.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Review.m; sourceTree = "<group>"; };
 		1B27109917867C6300B14E6C /* sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
-		1B57249717868F610071D1CA /* Root.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Root.h; sourceTree = "<group>"; };
-		1B57249817868F610071D1CA /* Root.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Root.m; sourceTree = "<group>"; };
+		1B57249717868F610071D1CA /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
+		1B57249817868F610071D1CA /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
+		1BE4D6AF179E369300BD3B3F /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
+		1BE4D6B0179E369300BD3B3F /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,12 +136,14 @@
 			children = (
 				1B27108D17867C0D00B14E6C /* KEJSONModelTests.h */,
 				1B27108E17867C0D00B14E6C /* KEJSONModelTests.m */,
-				1B57249717868F610071D1CA /* Root.h */,
-				1B57249817868F610071D1CA /* Root.m */,
+				1B57249717868F610071D1CA /* Menu.h */,
+				1B57249817868F610071D1CA /* Menu.m */,
 				1B27109517867C6300B14E6C /* MenuItem.h */,
 				1B27109617867C6300B14E6C /* MenuItem.m */,
 				1B27109717867C6300B14E6C /* Review.h */,
 				1B27109817867C6300B14E6C /* Review.m */,
+				1BE4D6AF179E369300BD3B3F /* Status.h */,
+				1BE4D6B0179E369300BD3B3F /* Status.m */,
 				1B27109917867C6300B14E6C /* sample.json */,
 				1B27108817867C0D00B14E6C /* Supporting Files */,
 			);
@@ -264,7 +269,8 @@
 				1B27108F17867C0D00B14E6C /* KEJSONModelTests.m in Sources */,
 				1B27109A17867C6300B14E6C /* MenuItem.m in Sources */,
 				1B27109B17867C6300B14E6C /* Review.m in Sources */,
-				1B57249917868F610071D1CA /* Root.m in Sources */,
+				1B57249917868F610071D1CA /* Menu.m in Sources */,
+				1BE4D6B1179E369400BD3B3F /* Status.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
