@@ -77,4 +77,4 @@ Xcode has a lot of riches and treasures I have not yet learned to tap. The subcl
 should have been auto-generated based on a single scan of a representative sample of the JSON message. This is somewhat
 similar how you 
 get all the NSManagedObject(s) generated from Xcode's Core Data Modeling tool with a schema. I will defintely work on this, but if 
-anyone want to help, please let me know. It would truly make web service client app a lot more fun.
+anyone want to help, please let me know. It would truly make writing web service client app a lot more fun.
