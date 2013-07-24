@@ -30,6 +30,7 @@ It is a convenient and lightweight mapper that helps with mapping JSON messages 
 ```
  And you want be able to just say these,
  
+```objC
  	// data is the NSData representation of the above JSON message.
  	NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
  	self.menu = [[Menu alloc] initWithDictionary:dict];
@@ -49,5 +50,6 @@ It is a convenient and lightweight mapper that helps with mapping JSON messages 
  	
  	NSLog(@"Status code = %@", self.menu.status.code);
  	NSLog(@"Status Description = %@", self.menu.status.localdesc);
+ ```
  
  Then KEJSONModel maybe right for you!
