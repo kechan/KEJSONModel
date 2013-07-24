@@ -3,7 +3,7 @@
                    "id": "JAP122",
                    "name": "Teriyaki Bento",
                    "spicy_level": "2",
-                   "description" : "Teriyaki Bento is one of the best lorem ipsum dolor sit",
+                   "description" : "Teriyaki Bento is one of the best",
                    "review-count" : "4",
                    "reviews" : [{
                                 "id" : "rev1",
@@ -15,5 +15,5 @@
     "status" : {
         "code": "0",
         "localdesc": "Everything is alright."
-    }
+    },
 }

@@ -33,7 +33,7 @@
         [self setValue:value forKey:key2propMap[key]];
     else {
         // subclass implementation should set the correct key value mappings for custom keys
-        NSLog(@"Undefined Key: %@", key);
+        NSLog(@">>>>>>> Undefined Key: %@", key);
     }
 
 }
@@ -95,17 +95,10 @@
 
 
 -(id)valueForUndefinedKey:(NSString *)key {
-    // subclass implementation shoudl provide the correct key value mappings for custom keys
-    NSLog(@"Undefined Key: %@", key);
+    // subclass implementation should provide the correct key value mappings for custom keys
+    NSLog(@">>>>>>> Undefined Key: %@", key);
     return nil;
 }
-
-//-(void)setValue:(id)value forUndefinedKey:(NSString *)key {
-//    
-//    // subclass implementation should set the correct key value mappings for custom keys
-//    NSLog(@"Undefined Key: %@", key);
-//    
-//}
 
 #pragma mark - Helper
 + (NSString *)propertyTypeStringOfProperty:(objc_property_t) property {
