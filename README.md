@@ -58,4 +58,4 @@ It basically combines the use of Objective C's powerful feature known as Key-Val
 the amount of boiler plate code you would need to write. This is inspired by features found in Core Data, as well as the web framework Ruby on Rails.
 
 ###How to use?
-Read the [wiki](https://github.com/kechan/KEJSONModel/wiki) for details. 
+Read the [wiki](https://github.com/kechan/KEJSONModel/wiki) for a quick walk through. 
