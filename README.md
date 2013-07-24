@@ -56,7 +56,7 @@ objects, with as little repetitive coding as possible. For example, if you have 
 Then KEJSONModel can help you to do this more quickly and efficiently! The time saved will add up, if you have to deal with
 a lot of different JSON messages.
 
-It basically combines the use of Objective C's powerful feature known as Key-Value Coding (KVC) and a bit of objective c runtime magic, to dramatically reduce
+Under the hood, it basically combines the use of Objective C's powerful feature known as Key-Value Coding (KVC) and a bit of objective c runtime magic, to dramatically reduce
 the amount of boiler plate code you would need to write.
 
 ### Why do I even want to do that??
