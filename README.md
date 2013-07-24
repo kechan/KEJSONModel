@@ -28,7 +28,7 @@ It is a convenient and lightweight mapper that helps with mapping JSON messages 
       },
     }
 ```
- And you want be able to just say these,
+ And you want to be able to just say these,
  
 ```objective-c
  	// data is the NSData representation of the above JSON message.
