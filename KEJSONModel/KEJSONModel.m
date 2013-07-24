@@ -52,6 +52,7 @@
         
         NSString *propertyType = [[self class] propertyTypeStringOfProperty:property];
         
+        // Handle Array of KEJSONModel objects
         if ([propertyType isEqualToString:@"NSMutableArray"]) {
             
             // Figure out what class/type the element of this array is:
@@ -69,18 +70,18 @@
                     [arr addObject:elemObj];
                 }
                 else {
-                    // This would be a pretty complicated situation, just bail for now.
-                    NSAssert(NO, @"TODO: Must handle array of array in the given JSON");
+                    // Just bail for now.
+                    NSAssert(NO, @"TODO: Don't know how to handle array of array yet.");
                     return;
                 }
             }
             
             [super setValue:arr forKey:key];
             
-            return;       // IMPORTANT: you don't want the usual another setValue:forKey: treatment
+            return;       // IMPORTANT: return here, you don't want another repeated setValue:forKey: call
         }
         
-        // Handle JSONModel
+        // Handle a KEJSONModel
         Class elemClass = NSClassFromString(propertyType);
         if ([elemClass isSubclassOfClass:[KEJSONModel class]]) {
             id elemObj = [[elemClass alloc] initWithDictionary:value];
