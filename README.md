@@ -16,7 +16,7 @@ It is a convenient and lightweight mapper that helps with mapping JSON messages 
 			"spicy_level" : "2",
 			"review-count" : "4",
 			"reviews" : [{
-					"id" : "2"
+					"id" : "2",
 					"reviewText" : "This is awesome!",
 					"reviewerName" : "Cool dude",
 					"rating" : "5"
