@@ -49,4 +49,4 @@ It is a convenient and lightweight mapper that helps with mapping JSON messages 
  	NSLog(@"Status code = %@", self.menu.status.code);
  	NSLog(@"Status Description = %@", self.menu.status.localdesc);
  
- KEJSONModel may be right for you!
+ Then KEJSONModel maybe right for you!
