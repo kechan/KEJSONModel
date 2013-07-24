@@ -27,7 +27,7 @@ It is a convenient and lightweight mapper that helps with mapping JSON messages 
       },
     }
 
- And you want be able to say this in your code,
+ And you want be able to just say this in your code,
  
  	// data is the NSData representation of the above JSON message.
  	NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
