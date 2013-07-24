@@ -53,7 +53,8 @@ objects, with as little repetitive coding as possible. For example, if you have 
  	NSLog(@"Status Description = %@", self.menu.status.localdesc);
  ```
  
-Then KEJSONModel can help you to do this quickly and efficiently! 
+Then KEJSONModel can help you to do this more quickly and efficiently! The time saved will add up, if you have to deal with
+a lot of different JSON messages.
 
 It basically combines the use of Objective C's powerful feature known as Key-Value Coding (KVC) and a bit of objective c runtime magic, to dramatically reduce
 the amount of boiler plate code you would need to write.
@@ -66,4 +67,7 @@ in your overall MVC application architecture.
 
 
 ###How to use?
-Read the [wiki](https://github.com/kechan/KEJSONModel/wiki) for a quick walk through. 
+Read the [wiki](https://github.com/kechan/KEJSONModel/wiki) for a quick walk through. Or just clone the project and take
+a look at the Unit Test for a concrete example. The target built is a static library (with the header file included in "Copy Files"
+Build Phases). You can either integrate this library into your own project, or just drop the 2 files (KEJSONModel.h, .m) into
+your own project.
