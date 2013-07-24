@@ -8,6 +8,7 @@ This is Version 0.01. Please read the [wiki](https://github.com/kechan/KEJSONMod
 ### Why KEJSONModel?
 It is a convenient and lightweight mapper that helps with mapping JSON messages to a hierachy/tree of NSObject-based objects, with as little coding as possible. For example, if you have a JSON that looks like this:
 
+```json
     { 
 	"menuItems" : [{
 			"id" : "1",
@@ -26,7 +27,7 @@ It is a convenient and lightweight mapper that helps with mapping JSON messages 
 		"localdesc" : "Everything is alright."
       },
     }
-
+```
  And you want be able to just say these,
  
  	// data is the NSData representation of the above JSON message.
