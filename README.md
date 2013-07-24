@@ -6,7 +6,8 @@ This is Version 0.01. Please read the [wiki](https://github.com/kechan/KEJSONMod
 ---
 
 ### What is KEJSONModel?
-It is a convenient and lightweight mapper that helps with mapping JSON messages to a hierachy/tree of NSObject-based objects, with as little coding as possible. For example, if you have a JSON that looks like this:
+It is a convenient and lightweight mapper that helps with mapping JSON messages to a hierachy/tree of NSObject-based 
+objects, with as little repetitive coding as possible. For example, if you have a JSON that looks like this:
 
 ```json
     { 
