@@ -71,3 +71,9 @@ Read the [wiki](https://github.com/kechan/KEJSONModel/wiki) for a quick walk thr
 a look at the Unit Test (KEJSONModelTests) for a concrete example. The target built is a static library (with the header file included in "Copy Files"
 Build Phases). You can either integrate this library, or just drop the 2 files (KEJSONModel.h, .m) into
 your own project.
+
+### What's even more awesome?
+Xcode has a lot of riches and treasures I have not yet learned to tap. The subclasses of KEJSONModel you have to write
+should have been auto-generated based on a single scan of a representative sample of the JSON message. This is how you would
+get all your NSManagedObject(s) generated from Xcode's Core Data Modeling tool. I will defintely work on this, but if 
+anyone want to help, please let me know. It would truly make web service client app a lot more fun.
