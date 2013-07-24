@@ -57,5 +57,12 @@ Then KEJSONModel maybe right for you!
 It basically combines the use of Objective C's powerful feature known as Key-Value Coding (KVC) and a bit of objective c runtime magic, to dramatically reduce
 the amount of boiler plate code you would need to write. This is inspired by features found in Core Data, as well as the web framework Ruby on Rails.
 
+### Why do I even want to do that??
+If your app connects to a web service (such as Twitter), you will likely receive a response in JSON format, which can end
+up as NSString or NSData. Ideally, this data should be wrapped in an object, that have a set of properties, just like your
+other nice classes/objects. Your set (or hierarchy/tree) of such data-oriented classes/objects naturally form part of your "Model",
+in your overall MVC application architecture.
+
+
 ###How to use?
 Read the [wiki](https://github.com/kechan/KEJSONModel/wiki) for a quick walk through. 
