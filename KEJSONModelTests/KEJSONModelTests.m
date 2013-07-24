@@ -55,7 +55,7 @@
     STAssertTrue([menuItem.itemId isEqualToString:@"JAP122"], @"Menuitem id is not JAP122");
     STAssertTrue([menuItem.name isEqualToString:@"Teriyaki Bento"], @"Menuitem Name is not Teriyaki Bento");
     STAssertTrue([menuItem.spicyLevel isEqualToString:@"2"], @"Menuitem Spicy level is not 2");
-    STAssertTrue([menuItem.itemDescription isEqualToString:@"Teriyaki Bento is one of the best lorem ipsum dolor sit"], @"Menuitem description is not right");
+    STAssertTrue([menuItem.itemDescription isEqualToString:@"Teriyaki Bento is one of the best"], @"Menuitem description is not right");
     STAssertTrue([menuItem.reviewCount isEqualToString:@"4"], @"Menuitem ReviewCount is not 4");
     
     NSArray *reviews = menuItem.reviews;
