@@ -69,5 +69,5 @@ in your overall MVC application architecture.
 ###How to use?
 Read the [wiki](https://github.com/kechan/KEJSONModel/wiki) for a quick walk through. Or just clone the project and take
 a look at the Unit Test for a concrete example. The target built is a static library (with the header file included in "Copy Files"
-Build Phases). You can either integrate this library into your own project, or just drop the 2 files (KEJSONModel.h, .m) into
+Build Phases). You can either integrate this library, or just drop the 2 files (KEJSONModel.h, .m) into
 your own project.
