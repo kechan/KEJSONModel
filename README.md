@@ -1,4 +1,3 @@
-
 A simple JSON to Object Model mapper for iOS
 
 ---
@@ -10,7 +9,7 @@ This is Version 0.01. Please read the wiki page for more details. This code has 
 It is a convenient and lightweight mapper that helps with mapping JSON messages to NSObject-based objects, with as little coding as possible. For example, if you have a JSON that looks like this:
 
     { 
-    	"menuItems" : [{
+	"menuItems" : [{
 			"id" : "1",
 			"name" : "Teriyaki",
 			"spicy_level" : "2",
@@ -47,4 +46,4 @@ It is a convenient and lightweight mapper that helps with mapping JSON messages 
  		}
  	}
  
- KEJSONModel may be right for you.
+ KEJSONModel may be right for you!
