@@ -53,10 +53,10 @@ objects, with as little repetitive coding as possible. For example, if you have 
  	NSLog(@"Status Description = %@", self.menu.status.localdesc);
  ```
  
-Then KEJSONModel can help you a bit! 
+Then KEJSONModel can help you to do this quickly and efficiently! 
 
 It basically combines the use of Objective C's powerful feature known as Key-Value Coding (KVC) and a bit of objective c runtime magic, to dramatically reduce
-the amount of boiler plate code you would need to write. This is inspired by features found in Core Data, as well as the web framework Ruby on Rails.
+the amount of boiler plate code you would need to write.
 
 ### Why do I even want to do that??
 If your app connects to a web service (such as Twitter), you will likely receive a response in JSON format, which can end
