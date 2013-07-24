@@ -24,8 +24,8 @@ It is a convenient and lightweight mapper that helps in converting JSON messages
 				}]
 			}],
       "status" : {
-         "code" : "0",
-	 "localdesc" : "Everything is alright."
+         	"code" : "0",
+	 	"localdesc" : "Everything is alright."
       },
     }
 
