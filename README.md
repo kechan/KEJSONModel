@@ -30,7 +30,7 @@ It is a convenient and lightweight mapper that helps with mapping JSON messages 
 ```
  And you want be able to just say these,
  
-```objC
+```objective-c
  	// data is the NSData representation of the above JSON message.
  	NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
  	self.menu = [[Menu alloc] initWithDictionary:dict];
