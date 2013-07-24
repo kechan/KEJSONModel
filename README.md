@@ -57,5 +57,5 @@ Then KEJSONModel maybe right for you!
 It basically combines the use of Objective C's powerful feature known as Key-Value Coding (KVC) and a bit of objective c runtime magic, to dramatically reduce
 the amount of boiler plate code you would need to write. This is inspired by features found in Core Data, as well as the web framework Ruby on Rails.
 
-###How to use this.
+###How to use?
 Read the [wiki](https://github.com/kechan/KEJSONModel/wiki) for details. 
