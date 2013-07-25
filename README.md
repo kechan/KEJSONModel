@@ -18,8 +18,7 @@ objects, with as little repetitive coding as possible. For example, if you have 
 			"review-count" : "4",
 			"reviews" : [{
 					"id" : "2",
-					"reviewText" : "This is awesome!",
-					"reviewerName" : "Cool dude",
+					"text" : "This is awesome!",
 					"rating" : "5"
 				}]
 			}],
@@ -44,7 +43,7 @@ objects, with as little repetitive coding as possible. For example, if you have 
  		
  		for (Review *review in menuItem.reviews) {
  			NSLog("review id = %@", review.reviewId);
- 			NSLog("reviewer name = %@", review.reviewerName);
+ 			NSLog("review text = %@", review.text);
  			// etc.
  		}
  	}
