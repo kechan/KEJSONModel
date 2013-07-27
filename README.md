@@ -52,17 +52,6 @@ objects, with as little repetitive coding as possible. For example, if you have 
  	NSLog(@"Status Description = %@", self.menu.status.localdesc);
  ```
  
- By declaring simply these interfaces and implementations: 
- 
- ```objective-c
- #import "KEJSONModel.h"
- 
- @interface Menu : KEJSONModel
- @property (nonatomic, strong) NSMutableArray *menuItems;
- @property (nonatomic, strong) Status *status;
- @end
- ```
- 
 Then KEJSONModel can help you to do this more quickly and efficiently! The time saved will add up, if you have to deal with
 a lot of different JSON messages.
 
