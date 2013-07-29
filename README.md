@@ -74,6 +74,6 @@ your own project.
 ### What's even more awesome?
 Xcode has a lot of riches and treasures I have not yet learned to tap. The subclasses of KEJSONModel you have to write
 should have been auto-generated based on a single scan of a representative sample of the JSON message. This is somewhat
-similar how you 
+similar to how you 
 get all the NSManagedObject(s) generated from Xcode's Core Data Modeling tool with a schema. I will defintely work on this, but if 
 anyone want to help, please let me know. It would truly make writing web service client app a lot more fun.
