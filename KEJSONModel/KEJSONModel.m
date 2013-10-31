@@ -12,7 +12,7 @@
 @implementation KEJSONModel
 
 +(NSDictionary *)jsonKeyToObjectPropertyNameMap {
-    // subclass should override this if there's any remap of JSON key vs. Object property name
+    // subclass should override this if there's any renames of JSON key vs. Object property name
     return nil;
 }
 
@@ -44,6 +44,7 @@
     // eg. convert row-count to rowCount
     key = [KEJSONModel dashDelimitedStringToUncapitalizedCamelCaseString:key];
     key = [KEJSONModel underscoreDelimitedStringToUncapitalizedCamelCaseString:key];
+    key = [KEJSONModel returnStringToStartwithLowerCase:key];
     
     // perform type/class checking
     // Introspect on the key/property's class type
@@ -91,6 +92,7 @@
 
     }
     
+    // can't handle this, delegate to super
     [super setValue:value forKey:key];
 }
 
@@ -176,14 +178,28 @@
     NSMutableString *returnString = [NSMutableString new];
     NSArray *a = [inputString componentsSeparatedByString:@"_"];
     
-    // Do not capitalize the 1st one.
-    [returnString appendString:a[0]];
+    // Do not capitalize the 1st non-empty string, it should start with lowercase
+    int k = 0;
+    while ([a[k] isEqualToString:@""])
+        k++;
     
-    for (int i = 1; i < a.count; i++) {
-        NSString *capSubstr = [a[i] capitalizedString];
+    [returnString appendString:a[k]];
+    
+    for (int i = k+1; i < a.count; i++) {
+//        NSString *capSubstr = [a[i] capitalizedString];
+        
+        NSString *capSubstr = [a[i] stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[a[i] substringToIndex:1] uppercaseString]];
+        
         [returnString appendString:capSubstr];
     }
     return returnString;
+}
+
++(NSString *)returnStringToStartwithLowerCase:(NSString *)inputString {
+
+    return [inputString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[inputString substringToIndex:1] lowercaseString]];
+
+    
 }
 
 @end

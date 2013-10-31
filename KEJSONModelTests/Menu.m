@@ -11,7 +11,7 @@
 @implementation Menu
 
 -(NSString *) description {
-    NSString *desc = [NSString stringWithFormat:@"%d menuItems and status = %@", self.menuItems.count, self.status];
+    NSString *desc = [NSString stringWithFormat:@"%lu menuItems and status = %@", (unsigned long)self.menuItems.count, self.status];
     return desc;
 }
 
