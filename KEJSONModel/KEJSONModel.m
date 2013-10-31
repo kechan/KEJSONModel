@@ -186,10 +186,7 @@
     [returnString appendString:a[k]];
     
     for (int i = k+1; i < a.count; i++) {
-//        NSString *capSubstr = [a[i] capitalizedString];
-        
         NSString *capSubstr = [a[i] stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[a[i] substringToIndex:1] uppercaseString]];
-        
         [returnString appendString:capSubstr];
     }
     return returnString;
