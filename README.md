@@ -1,12 +1,12 @@
 A simple JSON to Object Model mapper for iOS
 
 ---
-This is Version 0.01. Please read the [wiki](https://github.com/kechan/KEJSONModel/wiki) page for more details. This code has been tested with iOS 6.0 and XCode 4.6.3
+This is Version 0.01. Please read the [wiki](https://github.com/kechan/KEJSONModel/wiki) page for more details. This code has been tested with iOS 6.0 and XCode 4.6.3.
 
 ---
 
 ### What is KEJSONModel?
-It is a convenient and lightweight mapper that helps with mapping JSON messages to a hierachy/tree of NSObject-based 
+It is a convenient mapper that helps with mapping JSON messages to a hierachy/tree of NSObject-based 
 objects, with as little repetitive coding as possible. For example, if you have a JSON that looks like this:
 
 ```json
@@ -18,8 +18,7 @@ objects, with as little repetitive coding as possible. For example, if you have 
 			"review-count" : "4",
 			"reviews" : [{
 					"id" : "2",
-					"reviewText" : "This is awesome!",
-					"reviewerName" : "Cool dude",
+					"text" : "This is awesome!",
 					"rating" : "5"
 				}]
 			}],
@@ -44,7 +43,7 @@ objects, with as little repetitive coding as possible. For example, if you have 
  		
  		for (Review *review in menuItem.reviews) {
  			NSLog("review id = %@", review.reviewId);
- 			NSLog("reviewer name = %@", review.reviewerName);
+ 			NSLog("review text = %@", review.text);
  			// etc.
  		}
  	}
@@ -75,6 +74,26 @@ your own project.
 ### What's even more awesome?
 Xcode has a lot of riches and treasures I have not yet learned to tap. The subclasses of KEJSONModel you have to write
 should have been auto-generated based on a single scan of a representative sample of the JSON message. This is somewhat
-similar how you 
+similar to how you 
 get all the NSManagedObject(s) generated from Xcode's Core Data Modeling tool with a schema. I will defintely work on this, but if 
 anyone want to help, please let me know. It would truly make writing web service client app a lot more fun.
+
+### Licensing
+KEJSONModel is licensed under MIT License. Permission is hereby granted, free of charge, 
+to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
