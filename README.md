@@ -1,7 +1,9 @@
 A simple JSON to Object Model mapper for iOS
 
 ---
-This is Version 0.01. Please read the [wiki](https://github.com/kechan/KEJSONModel/wiki) page for more details. This code has been tested with iOS 6.0 and XCode 4.6.3.
+This is Version 0.05. Please read the [wiki](https://github.com/kechan/KEJSONModel/wiki) page for more details. This code has been tested with iOS 7.0 and XCode 5.0. 
+The library target's deployment target is set to iOS 7.0 with "Standard architectures (including 64-bit)..." as Architectures. You may need to reconfigure this
+as needed if you decide to integrate the whole project.
 
 ---
 
