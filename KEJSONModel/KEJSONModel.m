@@ -40,6 +40,11 @@
 
 -(void)setValue:(id)value forKey:(NSString *)key {
     
+    // First see if this subclass has overriden the key
+    NSDictionary *key2propMap = [[self class] jsonKeyToObjectPropertyNameMap];
+    if (key2propMap && key2propMap[key])
+        key = key2propMap[key];
+    
     // If key contains "-", convert to lower case start and the rest camel case
     // eg. convert row-count to rowCount
     key = [KEJSONModel dashDelimitedStringToUncapitalizedCamelCaseString:key];
