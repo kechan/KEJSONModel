@@ -9,11 +9,40 @@
 #import "KEJSONModel.h"
 #import <objc/message.h>
 
+@interface KEJSONModel ()
+@property (nonatomic, strong) NSMutableDictionary *objectPropertyNameToJsonKeyMap;
+@property (nonatomic, strong) NSMutableDictionary *staticObjectPropertyNameToJsonKeyMap;
+@end
+
+
 @implementation KEJSONModel
 
 +(NSDictionary *)jsonKeyToObjectPropertyNameMap {
     // subclass should override this if there's any renames of JSON key vs. Object property name
     return nil;
+}
+
+#pragma mark - Getters & Setters
+-(NSMutableDictionary *)objectPropertyNameToJsonKeyMap {
+    
+    if (_objectPropertyNameToJsonKeyMap == nil) {
+        _objectPropertyNameToJsonKeyMap = [NSMutableDictionary new];
+    }
+    return _objectPropertyNameToJsonKeyMap;
+}
+
+-(NSMutableDictionary *)staticObjectPropertyNameToJsonKeyMap {
+    if (_staticObjectPropertyNameToJsonKeyMap == nil) {
+        _staticObjectPropertyNameToJsonKeyMap = [NSMutableDictionary new];
+        
+        NSDictionary *map = [[self class] jsonKeyToObjectPropertyNameMap];
+        
+        for (NSString *key in map) {
+            _staticObjectPropertyNameToJsonKeyMap[map[key]] = key;
+        }
+        
+    }
+    return _staticObjectPropertyNameToJsonKeyMap;
 }
 
 # pragma mark - Designated Init
@@ -24,32 +53,103 @@
     return self;
 }
 
+# pragma mark - Representation
+-(NSDictionary *) toNSDictionarySkipNullValue:(BOOL)bSkipNull {
+    
+    NSMutableDictionary *returnDict = [NSMutableDictionary new];
+    
+    unsigned int outCount;
+    objc_property_t *properties = class_copyPropertyList([self class], &outCount);
+    
+    for (int i=0; i < outCount; i++) {
+        objc_property_t property = properties[i];
+        
+        NSString *const propertyType = [[self class] propertyTypeStringOfProperty:property];
+        NSString *const propertyName = [NSString stringWithCString:property_getName(property) encoding:NSUTF8StringEncoding];
+        id propertyValue = [self valueForKey:propertyName];
+        
+        //        NSLog(@"type = %@, name = %@, value = %@", propertyType, propertyName, propertyValue);
+        
+        NSString *jsonKey = self.objectPropertyNameToJsonKeyMap[propertyName];
+        if (jsonKey == nil)
+            jsonKey = self.staticObjectPropertyNameToJsonKeyMap[propertyName];
+        if (jsonKey == nil) {  // still nothing
+            NSLog(@">>>>>>> Unable to find json key for property = %@", propertyName);
+            jsonKey = propertyName;
+        }
+        
+        // Handle Array of KEJSONModel objects
+        if ([propertyType isEqualToString:@"NSMutableArray"]) {
+            if (propertyValue) {
+                returnDict[jsonKey] = [NSMutableArray new];
+                NSMutableArray *childarray = (NSMutableArray *)propertyValue;
+                
+                for (KEJSONModel *modelObj in childarray) {
+                    [returnDict[jsonKey] addObject:[modelObj toNSDictionarySkipNullValue:bSkipNull]];
+                }
+            }
+            else {
+                if (!bSkipNull)
+                    returnDict[jsonKey] = [NSNull null];
+            }
+        }
+        else if ([NSClassFromString(propertyType) isSubclassOfClass:[KEJSONModel class]]) {
+            if (propertyValue) {
+                KEJSONModel *modelObj = (KEJSONModel *) propertyValue;
+                returnDict[jsonKey] = [modelObj toNSDictionarySkipNullValue:bSkipNull];
+            }
+            else {
+                if (!bSkipNull)
+                    returnDict[jsonKey] = [NSNull null];
+            }
+        }
+        else {
+            // primitive type (ie. NSString, NSNumber, etc).
+            if (propertyValue)
+                returnDict[jsonKey] = propertyValue;
+            else {
+                if (!bSkipNull)
+                    returnDict[jsonKey] = [NSNull null];
+            }
+        }
+        
+    }
+    
+    free(properties);
+    
+    return returnDict;
+}
+
 # pragma mark - KVC
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {    
-    NSDictionary *key2propMap = [[self class] jsonKeyToObjectPropertyNameMap];
-    
-    if (key2propMap && key2propMap[key])
-        [self setValue:value forKey:key2propMap[key]];
-    else {
+//    NSDictionary *key2propMap = [[self class] jsonKeyToObjectPropertyNameMap];
+//    
+//    if (key2propMap && key2propMap[key])
+//        [self setValue:value forKey:key2propMap[key]];
+//    else {
         // subclass implementation should set the correct key value mappings for custom keys
-        NSLog(@">>>>>>> Undefined Key: %@", key);
-    }
+    NSLog(@">>>>>>> Undefined Key Warning <<<<<<<<");
+    NSLog(@">>> JSON key \"%@\" not found in any properties of %@", self.objectPropertyNameToJsonKeyMap[key], [self class]);
+    NSLog(@">>> Attempted camel-case version = %@", key);
+//    }
 
 }
 
 -(void)setValue:(id)value forKey:(NSString *)key {
     
     // First see if this subclass has overriden the key
+    NSString *originalKey = [key copy];
     NSDictionary *key2propMap = [[self class] jsonKeyToObjectPropertyNameMap];
     if (key2propMap && key2propMap[key])
         key = key2propMap[key];
     
     // If key contains "-", convert to lower case start and the rest camel case
     // eg. convert row-count to rowCount
-    key = [KEJSONModel dashDelimitedStringToUncapitalizedCamelCaseString:key];
-    key = [KEJSONModel underscoreDelimitedStringToUncapitalizedCamelCaseString:key];
-    key = [KEJSONModel returnStringToStartwithLowerCase:key];
+    key = [KEJSONModel massageInputStringToCamelCase:key];
+    
+    // store the reverse key transformation here
+    self.objectPropertyNameToJsonKeyMap[key] = originalKey;
     
     // perform type/class checking
     // Introspect on the key/property's class type
@@ -97,7 +197,6 @@
 
     }
     
-    // can't handle this, delegate to super
     [super setValue:value forKey:key];
 }
 
@@ -155,6 +254,16 @@
     return [inputString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[inputString substringToIndex:1] uppercaseString]];
 }
 
++(NSString *)massageInputStringToCamelCase:(NSString *) inputString {
+    NSString *outputString;
+    
+    outputString = [KEJSONModel dashDelimitedStringToUncapitalizedCamelCaseString:inputString];
+    outputString = [KEJSONModel underscoreDelimitedStringToUncapitalizedCamelCaseString:outputString];
+    outputString = [KEJSONModel returnStringToStartwithLowerCase:outputString];
+    
+    return outputString;
+}
+
 +(NSString *)dashDelimitedStringToUncapitalizedCamelCaseString:(NSString *)inputString {
     // eg. convert row-count to rowCount
     
@@ -203,6 +312,7 @@
 
     
 }
+
 
 @end
 
