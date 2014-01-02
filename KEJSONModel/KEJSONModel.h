@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^KEJSONModelPropertyTypeNameValueBlock)(NSString *type, NSString *name, id value);
+
 @interface KEJSONModel : NSObject
 
 

@@ -58,31 +58,21 @@
     
     NSMutableDictionary *returnDict = [NSMutableDictionary new];
     
-    unsigned int outCount;
-    objc_property_t *properties = class_copyPropertyList([self class], &outCount);
+    [self enumeratePropertyTypeNameValue:^(NSString *type, NSString *name, id value) {
     
-    for (int i=0; i < outCount; i++) {
-        objc_property_t property = properties[i];
-        
-        NSString *const propertyType = [[self class] propertyTypeStringOfProperty:property];
-        NSString *const propertyName = [NSString stringWithCString:property_getName(property) encoding:NSUTF8StringEncoding];
-        id propertyValue = [self valueForKey:propertyName];
-        
-        //        NSLog(@"type = %@, name = %@, value = %@", propertyType, propertyName, propertyValue);
-        
-        NSString *jsonKey = self.objectPropertyNameToJsonKeyMap[propertyName];
+        NSString *jsonKey = self.objectPropertyNameToJsonKeyMap[name];
         if (jsonKey == nil)
-            jsonKey = self.staticObjectPropertyNameToJsonKeyMap[propertyName];
+            jsonKey = self.staticObjectPropertyNameToJsonKeyMap[name];
         if (jsonKey == nil) {  // still nothing
-            NSLog(@">>>>>>> Unable to find json key for property = %@", propertyName);
-            jsonKey = propertyName;
+            NSLog(@">>>>>>> Unable to find json key for property = %@", name);
+            jsonKey = name;
         }
         
         // Handle Array of KEJSONModel objects
-        if ([propertyType isEqualToString:@"NSMutableArray"]) {
-            if (propertyValue) {
+        if ([type isEqualToString:@"NSMutableArray"]) {
+            if (value) {
                 returnDict[jsonKey] = [NSMutableArray new];
-                NSMutableArray *childarray = (NSMutableArray *)propertyValue;
+                NSMutableArray *childarray = (NSMutableArray *)value;
                 
                 for (KEJSONModel *modelObj in childarray) {
                     [returnDict[jsonKey] addObject:[modelObj toNSDictionarySkipNullValue:bSkipNull]];
@@ -93,9 +83,9 @@
                     returnDict[jsonKey] = [NSNull null];
             }
         }
-        else if ([NSClassFromString(propertyType) isSubclassOfClass:[KEJSONModel class]]) {
-            if (propertyValue) {
-                KEJSONModel *modelObj = (KEJSONModel *) propertyValue;
+        else if ([NSClassFromString(type) isSubclassOfClass:[KEJSONModel class]]) {
+            if (value) {
+                KEJSONModel *modelObj = (KEJSONModel *) value;
                 returnDict[jsonKey] = [modelObj toNSDictionarySkipNullValue:bSkipNull];
             }
             else {
@@ -105,24 +95,22 @@
         }
         else {
             // primitive type (ie. NSString, NSNumber, etc).
-            if (propertyValue)
-                returnDict[jsonKey] = propertyValue;
+            if (value)
+                returnDict[jsonKey] = value;
             else {
                 if (!bSkipNull)
                     returnDict[jsonKey] = [NSNull null];
             }
         }
         
-    }
-    
-    free(properties);
-    
+    }];
+
     return returnDict;
 }
 
 # pragma mark - KVC
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
-{    
+{
 //    NSDictionary *key2propMap = [[self class] jsonKeyToObjectPropertyNameMap];
 //    
 //    if (key2propMap && key2propMap[key])
@@ -175,10 +163,13 @@
                     id elemObj = [[elemClass alloc] initWithDictionary:elem];
                     [arr addObject:elemObj];
                 }
-                else {
-                    // Just bail for now.
+                else if ([elem isKindOfClass:[NSArray class]]) {
                     NSAssert(NO, @"TODO: Don't know how to handle array of array yet.");
                     return;
+                }
+                else {
+                    // Assume elem is already member of elemClass
+                    [arr addObject:elem];
                 }
             }
             
@@ -190,7 +181,15 @@
         // Handle a KEJSONModel
         Class elemClass = NSClassFromString(propertyType);
         if ([elemClass isSubclassOfClass:[KEJSONModel class]]) {
-            id elemObj = [[elemClass alloc] initWithDictionary:value];
+            
+            id elemObj;
+            if ([value isKindOfClass:[NSDictionary class]]) {
+                elemObj = [[elemClass alloc] initWithDictionary:value];
+            } else {
+                // if value is already member of elemClass
+                elemObj = value;
+            }
+                 
             [super setValue:elemObj forKey:key];
             return;
         }
@@ -226,6 +225,47 @@
         }
     }
     return nil;
+}
+
+-(void) enumeratePropertyTypeNameValue:(KEJSONModelPropertyTypeNameValueBlock)propertyTypeNameValue {
+    
+    unsigned int outCount;
+    objc_property_t *properties = class_copyPropertyList([self class], &outCount);
+    
+    for (int i=0; i < outCount; i++) {
+        objc_property_t property = properties[i];
+        
+        NSString *const propertyType = [[self class] propertyTypeStringOfProperty:property];
+        NSString *const propertyName = [NSString stringWithCString:property_getName(property) encoding:NSUTF8StringEncoding];
+        id propertyValue = [self valueForKey:propertyName];
+        
+        propertyTypeNameValue(propertyType, propertyName, propertyValue);
+
+    }
+    
+    free(properties);
+    
+    // Enumerate for superclass up until this class
+    Class theClass = [self class];
+    while (![NSStringFromClass(class_getSuperclass(theClass)) isEqualToString:@"KEJSONModel"]) {
+        
+        theClass = class_getSuperclass(theClass);
+        
+        unsigned int outCountSub;
+        objc_property_t *properties = class_copyPropertyList(theClass, &outCountSub);
+        
+        for (int i=0; i < outCountSub; i++) {
+            objc_property_t property = properties[i];
+            
+            NSString *const propertyType = [[self class] propertyTypeStringOfProperty:property];
+            NSString *const propertyName = [NSString stringWithCString:property_getName(property) encoding:NSUTF8StringEncoding];
+            id propertyValue = [self valueForKey:propertyName];
+            
+            propertyTypeNameValue(propertyType, propertyName, propertyValue);
+        }
+
+        free(properties);
+    }
 }
 
 +(NSString *)removeSuffixArray:(NSString *)inputString {
